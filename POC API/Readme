@@ -1,0 +1,4 @@
+
+// To run test
+// cmd: set TARGET_ENV=TEST&& npx playwright test
+//powershell: $env:TARGET_ENV="TEST"; npx playwright test

@@ -1,0 +1,37 @@
+,,,,,,,
+List of APIs,,,,,,,
+1,CreateUser API – create a new user,,,,,,
+2,UpdateUser API – update user information,,,,,,
+3,DeleteUser API – delete a user,,,,,,
+4,GetUser API – retrieve user information,,,,,,
+5,"ETE Flow – end-to-end flow: 
++ Create ? update ? delete user
++ Get exist user ? Update
+
+
+",,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+Total Tcs,Passed,Failed,,,,,
+16,15,1,,,,,
+,,,,,,,
+,,,,,,,
+Test Case ID,Endpoint,Method,Input,Expected Status,Expected Response,Remarks,Status
+TC001,/api/users,POST,"{email:""eve.holt@reqres.in"", password:""cityslicka""}",200,"{id, token}",Create User Successfully,PASSED
+TC002,/api/users,POST,"{email:""invalidEmail"", password:""""}",400,"{error:""Missing password""}",Create failed with invalid param,PASSED
+TC003,/api/users,POST,"{email, password}, XAPIKey=empty",401,"{error:""Missing API key""}",Create failed with 401 Unauthorized,PASSED
+TC004,/api/users/{id},PUT,"{email, password}",200,"{email, password}",Update User Successfully,PASSED
+TC005,/api/users/{id},PUT,"{email, password}, XAPIKey=invalid",403,"{error:""Invalid or inactive API key""}",Update User failed with 403 Forbidden,PASSED
+TC006,/api/users/{id},PUT,"{email, password}, XAPIKey=empty",401,"{error:""Missing API key""}",Update User failed with 401 Unauthorized,PASSED
+TC007,/api/users/{id},GET,-,200,"{data:{id,name,email,...}}",Get User Successfully,PASSED
+TC008,/api/users/{invalidId},GET,-,404,-,Get failed with 404 User Not Found,PASSED
+TC009,/api/users/{id},GET,XAPIKey=invalid,403,"{error:""Missing API key""}",Get failed with 403 Forbidden,FAILED
+TC010,/api/login,POST,"{email:""eve.holt@reqres.in"", password:""cityslicka""}",200,{token},Login Successfully,PASSED
+TC011,/api/login,POST,"{email:""eve.holt@reqres.in"", password:""""}",400,"{error:""Missing password""}",Login Failed With empty password,PASSED
+TC012,/api/users/{id},DELETE,-,204,-,Delete User Successfully,PASSED
+TC013,/api/users/{id},DELETE,XAPIKey=invalid,403,"{error:""Invalid or inactive API key""}",Delete failed with incorrect XAPIKey,PASSED
+TC014,/api/users/{id},DELETE,XAPIKey=empty,401,"{error:""Missing API key""}",Delete failed with 401 Unauthorized,PASSED
+TC015,/api/users,POST ? PUT ? DELETE,"{email,password} ? {email,password} ? delete",200 ? 200 ? 204,Responses match expectations,ETE Flow: Create ? Update ? Delete,PASSED
+TC016,/api/users/{id},GET ? PUT,"GET /users/{id} ? {email,password}",200,"{email,password}",ETE Flow: GET existing user ? Update info,PASSED
