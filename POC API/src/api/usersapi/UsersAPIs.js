@@ -98,12 +98,4 @@ module.exports = { UsersApi };
 //// add comment with new code
 //test.js
 
-<<<<<<< HEAD
 //add second time from VS
-=======
-<<<<<<< HEAD
-//add from Git- edit from VS 9 36
-=======
-//add from Git-update from git
->>>>>>> 5c4ec76d0a9711a1caa464ac87273a979e63e705
->>>>>>> b5f4ae385170343a389a8d339ed5ec3de7ca862a
